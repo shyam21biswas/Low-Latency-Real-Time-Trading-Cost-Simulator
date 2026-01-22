@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.10)
+project(TradeSimulator)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Find dependencies
+find_package(websocketpp REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread)
+find_package(RapidJSON REQUIRED)
+find_package(OpenSSL REQUIRED)
+
+# Include directories
+include_directories(${websocketpp_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${RapidJSON_INCLUDE_DIRS} ${OPENSSL_INCLUDE_DIR})
+
+# Add executable
+add_executable(trade_simulator src/trade_simulator.cpp)
+
+# Link libraries
+target_link_libraries(trade_simulator ${Boost_LIBRARIES} OpenSSL::SSL OpenSSL::Crypto)
